@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{%block header%}
+    <h1>{%block title%}Register a book{%endblock%}</h1>
+{%endblock%}
+{%block content%}
+    <form method="post">
+        <label for = "bookName">Book name</label>
+        <input name = "bookName", id="bookName" required>
+        <label for = "Author">Author</label>
+        <input name = "Author", id="Author" required>
+        <label for = "Published">Published</label>
+        <input type = "date" name = "Published", id="Published" required>
+        <label for = "Genre">Genre</label>
+        <input name = "Genre", id="Genre" required>
+        <button type="submit",value="addBook" >Register</button>
+    </form>
+    {%endblock%}
+    {%block back%}
+<nav>
+    <a id = "backB" href = "{{url_for('func.admin')}}">Go back</a>
+</nav>
+{%endblock%}

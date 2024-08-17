@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{%block header%}
+    <h1>{%block title%}Borrow a book{%endblock%}</h1>
+{%endblock%}
+{%block content%}
+    <form method="post"> 
+        <select name="sometext" method="post" action="/" >
+            {%for item in g.list%}
+              <option value="{{item}} ">{{item}} </option>
+            {% endfor %}
+          </select>
+
+        <button id = "borrowB" type="submit" >Borrow a book</button>
+        
+    </form> 
+    
+{%endblock%}
+{%block back%}
+<nav>
+    <a id = "backB" href = "{{url_for('user.user',id=g.user['id'])}}">Go back</a>
+</nav>
+{%endblock%}

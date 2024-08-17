@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{%block header%}
+    <h1>{%block title%}My account{%endblock%}</h1>
+{%endblock%}
+{%block content%}
+    <form method="post"> 
+        <div id="acc">
+            <div>
+                <h3>Borrowed books</h3>
+                <select name="sometext" method="post" action="/" >
+                    {%for item in g.list%}
+                    <option value="{{item}} ">{{item}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div id = "p1">
+                <h3 id = "h3">New password set up</h3>
+                <input type = "text" name = "oldPass"  id="pass" placeholder="Old password" required>
+                <input type = "text" name = "NewPass"  id="pass" placeholder="New password" required>
+                <button id = "changeP" type="submit" >Set password</button>
+            </div>
+    </div>
+        
+    </form> 
+    <h3>Rental history</h3>
+        <select name="sometext" method="post" action="/" >
+            {%for item in g.list2%}
+            <option value="{{item}} ">{{item}} </option>
+            {% endfor %}
+        </select>
+    
+{%endblock%}
+{%block back%}
+<nav>
+    <a id = "backB" href = "{{url_for('user.user',id=g.user['id'])}}">Go back</a>
+</nav>
+{%endblock%}

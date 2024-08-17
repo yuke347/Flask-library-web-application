@@ -1,0 +1,20 @@
+{% extends 'baseA.html' %}
+{%block header%}
+    <h1>{%block title%}Admin Log In{%endblock%}</h1>
+{%endblock%}
+{%block content%}
+    <div class="Container">
+        <a href="{{url_for('func.addBook')}}">
+            <button>Register a book</button>
+        </a>
+
+        <a href="{{url_for('func.setAmount')}}">
+            <button>Set book amount</button>
+        </a>
+
+        <a href="{{url_for('func.removeBook')}}">
+            <button>Remove book</button>
+        </a>
+    </div>
+{%endblock%}
+
