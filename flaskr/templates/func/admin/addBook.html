@@ -3,20 +3,19 @@
     <h1>{%block title%}Register a book{%endblock%}</h1>
 {%endblock%}
 {%block content%}
+    
+    <div class="registerB"></div>
     <form method="post">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <label for = "bookName">Book name</label>
         <input name = "bookName", id="bookName" required>
         <label for = "Author">Author</label>
         <input name = "Author", id="Author" required>
         <label for = "Published">Published</label>
-        <input type = "date" name = "Published", id="Published" required>
+        <input type = "date" name = "Published", id="Published" value="aaa" required>
         <label for = "Genre">Genre</label>
         <input name = "Genre", id="Genre" required>
-        <button type="submit",value="addBook" >Register</button>
+        <button id = "addBook" type="submit",value="addBook" >Register</button>
     </form>
     {%endblock%}
-    {%block back%}
-<nav>
-    <a id = "backB" href = "{{url_for('func.admin')}}">Go back</a>
-</nav>
-{%endblock%}

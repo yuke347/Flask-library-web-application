@@ -1,0 +1,110 @@
+<script>
+function openPage(pageName, elmnt, color) {
+    // Hide all elements with class="tabcontent" by default */
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    // Remove the background color of all tablinks/buttons
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
+    }
+  
+    // Show the specific tab content
+    document.getElementById(pageName).style.display = "block";
+  
+    // Add the specific color to the button used to open the tab content
+    elmnt.style.backgroundColor = color;
+  }
+  
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+
+  function highLightRow(id,element){
+    rowlinks = document.getElementsByClassName("rentalsR")
+    buttonlinks = document.getElementsByClassName("buttonT")
+    for (i = 0; i < rowlinks.length; i++) {
+      rowlinks[i].style.backgroundColor = "";
+    }
+    for (i = 0; i < buttonlinks.length; i++) {
+      buttonlinks[i].style.backgroundColor = "";
+    }
+    rowContent = document.getElementById(id);
+    element.style.backgroundColor="red";
+    rowContent.style.backgroundColor="green";
+
+  }
+</script>
+
+{% extends 'base.html' %}
+
+{%block header%}
+    <h1>{%block title%}Manage Users and Books{%endblock%}</h1>
+{%endblock%}
+{%block content%}
+<div >
+  <nav id = divB>
+      <a id = "backB" href = "{{url_for('func.admin')}}">Go back</a>
+  </nav>
+</div>
+  <div class="tab">
+      <button class="tablink" onclick="openPage('Users',this,'red')">Users password</button>
+      <button class="tablink" onclick="openPage('books', this,'red')">Books</button>
+      <button class="tablink" onclick="openPage('Rentals', this,'red')">Rentals</button>
+  </div>
+  <div id="Users" class="tabcontent" >
+
+      
+      <form method="post" ,action="">
+        <label for = "usersL">Users</label>
+        <select name = "users" method="post" id = "users" autofocus>
+            {%for item in g.list%}
+              <option value="{{item}} ">{{item}} </option>
+            {% endfor %}
+        </select>
+        <label for = "oldP">Old password</label>
+        <input name = "oldP", id="oldP" required>
+        <label for = "newP">New password</label>
+        <input name = "newP", id="newP" required>
+        <button type="submit" >Change Password</button>
+      </form>
+  </div>
+  <div id="books" class="tabcontent"  >
+    <h3>Books</h3>
+    <select name = "books" method="post" id = "books" size = "5" autofocus>
+        {%for item in g.listB%}
+          <option value="{{item}} ">{{item}} </option>
+        {% endfor %}
+    </select>
+  
+  </div>
+  <div id="Rentals" class="tabcontent" >
+    <table id="rentalsT">
+      <tr>
+        <th>Selection</th>
+        <th>No.</th>
+        <th>User name</th>
+        <th>Book title</th>
+        <th>Borrowed</th>
+        <th>Returned</th>
+      </tr>
+      {%for item in g.listR%}
+          <tr id = "{{item[0]}}" class="rentalsR">
+            <td >
+              <button  class="buttonT" onclick="highLightRow({{item[0]}},this)">Select</button>
+            </td>
+            {%for itemI in item%}
+              <td>{{itemI}}</td>
+            {% endfor %}
+          </tr>
+      {% endfor %}
+  </div>
+  <br>
+
+{%endblock%} 
+
+
+
+

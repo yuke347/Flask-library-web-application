@@ -1,4 +1,4 @@
-{% extends 'baseA.html' %}
+{% extends 'base.html' %}
 {%block header%}
     <h1>{%block title%}Admin Log In{%endblock%}</h1>
 {%endblock%}
@@ -15,6 +15,13 @@
         <a href="{{url_for('func.removeBook')}}">
             <button>Remove book</button>
         </a>
+        <a href="{{url_for('func.manageUsers')}}">
+            <button>Manage users and books</button>
+        </a>
     </div>
 {%endblock%}
-
+<div>
+    <nav>
+        <a id = "backB" href = "{{url_for('func.admin')}}">Go back</a>
+    </nav>
+</div>  

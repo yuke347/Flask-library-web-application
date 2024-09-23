@@ -4,7 +4,7 @@
 {%endblock%}
 {%block content%}
     <form method="post"> 
-        <select name="sometext" method="post" action="/" >
+        <select name="sometext" method="post" >
             {%for item in g.list%}
               <option value="{{item}} ">{{item}} </option>
             {% endfor %}
@@ -15,9 +15,4 @@
         
     </form> 
     
-{%endblock%}
-{%block back%}
-<nav>
-    <a id = "backB" href = "{{url_for('func.admin')}}">Go back</a>
-</nav>
 {%endblock%}

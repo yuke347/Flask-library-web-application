@@ -42,6 +42,8 @@ def borrowB(id):
         except:
             error = "Book is not available"
             flash(error)
+    if g.list==[]:
+        g.list.append("No books to borrow")
     return render_template("func/user/borrow.html")
 
 @bp.route("/<int:id>/return",methods=("GET","POST"))
@@ -77,15 +79,27 @@ def returnB(id):
 def account(id):
     db = get_db()
     if request.method == "POST":
-        amountS = request.form.values()
-        amountList = list(amountS)
-        print(amountList)
+        passws = list(request.form.values())
+        user = g.user["username"]
+        old = passws[1]
+        new = passws[2]
+        # print(passws)
+        userP = db.execute("select password from user where username = ?",(user,)).fetchone()
+        
+        if  userP is not None and check_password_hash(list(userP)[0],old) == True:
+            db.execute("update user set password = ? where username = ?",(generate_password_hash(new),user))
+            db.commit()
+            flash("Password changed")
+        else:
+            flash("Incorrect password")
+
     defaultOption(query="select borrowings.id,books.bookName,books.author from books join borrowings ON books.id = borrowings.book_id  where username_id = ? and return_date is NULL",QM=(g.user["id"],))
     if bl == []:
         g.list.append("No books borrowed")
     g.list2 = []
-    bl2 = db.execute("select borrowings.id,books.bookName,books.author,borrowings.borrow_date, borrowings.return_date from books join borrowings ON books.id = borrowings.book_id  where username_id = ? and return_date is not NULL",(g.user["id"],)).fetchall()
+    bl2 = db.execute("select borrowings.id,bookArchive.bookName,bookArchive.author,borrowings.borrow_date, borrowings.return_date from bookArchive join borrowings ON books.id = borrowings.book_id  where username_id = ? and return_date is not NULL",(g.user["id"],)).fetchall()
     for item in bl2:
         g.list2.append(f"{item["bookName"]}, {item["author"]}, borrowed: {item["borrow_date"]}, returned: {item["return_date"]}")
-
+    if bl2 == []:
+        g.list2.append("No rental history")
     return render_template("func/user/account.html")

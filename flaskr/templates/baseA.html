@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href = "{{url_for('static',filename = 'style.css')}}">
 <nav>    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <h1>Online Library System</h1>
     <ul>
         {%if g.user%}
@@ -24,5 +27,9 @@
 
 </section>
 {%block back%}
-
+<div>
+    <nav>
+        <a id = "backB" href = "{{url_for('func.admin')}}">Go back</a>
+    </nav>
+    </div>  
 {%endblock%}
